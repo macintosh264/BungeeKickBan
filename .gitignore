@@ -27,7 +27,7 @@ local.properties
 
 # PDT-specific
 .buildpath
-
+*.jar
 
 #################
 ## Visual Studio
