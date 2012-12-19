@@ -2,6 +2,7 @@ package dev.xyzcraft.net.bkbw;
 
 import java.util.HashSet;
 import net.md_5.bungee.ChatColor;
+import net.md_5.bungee.Permission;
 import net.md_5.bungee.command.CommandSender;
 import net.md_5.bungee.plugin.JavaPlugin;
 import org.json.JSONException;
@@ -16,6 +17,10 @@ public class CommandWhitelist extends MacCommand{
 	@Override
 	public void execute(CommandSender arg0, String[] arg1) {
             // TODO Auto-generated method stub
+            if (getPermission(arg0) != Permission.ADMIN && getPermission(arg0) != Permission.MODERATOR) {
+                arg0.sendMessage(StringFormatter.error("Permission denied."));
+                return;
+            }
             if (arg1.length < 1) {
                 arg0.sendMessage(StringFormatter.error("Unknow command (Valid commands: add,remove,list,on,off)"));
                 return;
