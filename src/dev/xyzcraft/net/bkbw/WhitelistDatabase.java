@@ -1,6 +1,8 @@
 package dev.xyzcraft.net.bkbw;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import org.json.JSONArray;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,25 @@ public class WhitelistDatabase extends MacDatabase{
 		}
 		super.save();
 	}
+        public String[] list() throws JSONException {
+            JSONArray whitelisted = super.databaseVar().getJSONArray("whitelisted");
+            int index = 0;
+            HashSet<String> wl;
+            wl = new HashSet();
+            String[] rWl = null;
+            while (!whitelisted.isNull(index)) {
+                wl.add(whitelisted.getString(index));
+                index++;
+            }
+            wl.toArray(rWl);
+            return rWl;
+        }
+        public void turnOnWhitelist() throws JSONException {
+              super.databaseVar().put("whitelist",true);
+        }
+        public void turnOffWhitelist() throws JSONException {
+              super.databaseVar().put("whitelist",false);
+        }
 	public void unWhitelist(String name) {
 		super.reload();
 		try {

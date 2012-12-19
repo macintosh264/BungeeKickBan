@@ -1,7 +1,6 @@
 package dev.xyzcraft.net.bkbw;
 
 import java.util.Map.Entry;
-
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.UserConnection;
 
