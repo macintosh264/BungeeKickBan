@@ -1,5 +1,6 @@
 package dev.xyzcraft.net.bkbw;
 
+import java.util.HashSet;
 import net.md_5.bungee.ChatColor;
 import net.md_5.bungee.command.CommandSender;
 import net.md_5.bungee.plugin.JavaPlugin;
@@ -73,7 +74,7 @@ public class CommandWhitelist extends MacCommand{
             return re;
         }
         private String[] list() {
-            String[] list;
+            HashSet<String> list;
             try {
               list = ((WBKMain)this.plugin).whitelistb.list();
             } catch (JSONException ex) {
@@ -82,10 +83,10 @@ public class CommandWhitelist extends MacCommand{
             }
             String formattedList = "";
             for (String user : list) {
-                formattedList = formattedList + ChatColor.AQUA + user + ChatColor.YELLOW + ",";
+                formattedList = formattedList + ChatColor.YELLOW + user + ChatColor.RED + ", ";
             }
-            formattedList = formattedList.substring(0, formattedList.length()-1);
-            String[] re = {ChatColor.AQUA + "There are currently " + list.length + " people whitelisted: ", ChatColor.RED + "The whitelist is currently " + ((((WBKMain)this.plugin).whitelistb.whitelistOn()) ? (ChatColor.GREEN + "on") : (ChatColor.DARK_RED + "off")) ,formattedList};
+            formattedList = formattedList.substring(0, formattedList.length()-2);
+            String[] re = {ChatColor.RED + "The whitelist is currently " + ((((WBKMain)this.plugin).whitelistb.whitelistOn()) ? (ChatColor.GREEN + "on") : (ChatColor.DARK_RED + "off")),ChatColor.RED + "There are currently " + ChatColor.YELLOW + list.size() + ChatColor.RED + " people whitelisted :" ,formattedList};
             return re;
             
         }

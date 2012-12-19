@@ -26,6 +26,7 @@ public class WBKMain extends JavaPlugin{
 		if (this.whitelistb.whitelistOn()) {
 			if (!this.whitelistb.whitelisted(event.getUsername())) {
 				event.setCancelReason(ChatColor.AQUA + "You have not been whitelisted on this server!");
+                                event.setCancelled(true);
 			}
 		}
 	}

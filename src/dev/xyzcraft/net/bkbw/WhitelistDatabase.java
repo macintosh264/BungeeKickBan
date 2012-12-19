@@ -1,7 +1,9 @@
 package dev.xyzcraft.net.bkbw;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONArray;
 
 import org.json.JSONException;
@@ -15,12 +17,13 @@ public class WhitelistDatabase extends MacDatabase{
 	}
 	public boolean whitelistOn() {
 		super.reload();
-		try {
-			return super.databaseVar().getBoolean("whitelist");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			return false;
-		}
+                boolean wl = false;
+                try {
+                   wl = super.databaseVar().getBoolean("whitelist");
+               } catch (JSONException ex) {
+                  Logger.getLogger(WhitelistDatabase.class.getName()).log(Level.SEVERE, null, ex);
+               }
+		return wl;
 	}
 	public boolean whitelisted(String name) {
 		super.reload();
@@ -33,6 +36,9 @@ public class WhitelistDatabase extends MacDatabase{
 	}
 	public void whitelist(String name) {
 		super.reload();
+                if (!super.databaseVar().has("whitelisted")) {
+              
+                }
 		try {
 			super.databaseVar().getJSONArray("whitelisted").put(name);
 		} catch (JSONException e) {
@@ -41,24 +47,27 @@ public class WhitelistDatabase extends MacDatabase{
 		}
 		super.save();
 	}
-        public String[] list() throws JSONException {
+        public HashSet<String> list() throws JSONException {
+            super.reload();
             JSONArray whitelisted = super.databaseVar().getJSONArray("whitelisted");
             int index = 0;
             HashSet<String> wl;
             wl = new HashSet();
-            String[] rWl = null;
             while (!whitelisted.isNull(index)) {
                 wl.add(whitelisted.getString(index));
                 index++;
             }
-            wl.toArray(rWl);
-            return rWl;
+            return wl;
         }
         public void turnOnWhitelist() throws JSONException {
+              super.reload();
               super.databaseVar().put("whitelist",true);
+              super.save();
         }
         public void turnOffWhitelist() throws JSONException {
+              super.reload();
               super.databaseVar().put("whitelist",false);
+              super.save();
         }
 	public void unWhitelist(String name) {
 		super.reload();
@@ -73,20 +82,19 @@ public class WhitelistDatabase extends MacDatabase{
 	@Override
 	JSONObject defaultDb() {
 		// TODO Auto-generated method stub
-		JSONObject defaultDb = new JSONObject();
-		try {
-			defaultDb.put("whitelist", false);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			defaultDb.put("whitelisted", (new ArrayList<String>()).add("macintosh264"));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return defaultDb;
+            JSONObject defaultDb = new JSONObject();
+            try {
+                defaultDb.put("whitelist", false);
+            } catch (JSONException ex) {
+                Logger.getLogger(WhitelistDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Collection<String> users = new HashSet<String>();
+            try {
+                defaultDb.put("whitelisted", users);
+           } catch (JSONException ex) {
+                Logger.getLogger(WhitelistDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return defaultDb;
 	}
 
 }
