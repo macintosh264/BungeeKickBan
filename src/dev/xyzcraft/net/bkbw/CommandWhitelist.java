@@ -18,7 +18,7 @@ public class CommandWhitelist extends MacCommand{
 	public void execute(CommandSender arg0, String[] arg1) {
             // TODO Auto-generated method stub
             if (getPermission(arg0) != Permission.ADMIN && getPermission(arg0) != Permission.MODERATOR) {
-                arg0.sendMessage(StringFormatter.error("Permission denied."));
+                arg0.sendMessage(StringFormatter.error("No Permission"));
                 return;
             }
             if (arg1.length < 1) {
