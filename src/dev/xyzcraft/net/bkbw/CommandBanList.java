@@ -23,7 +23,7 @@ public class CommandBanList extends MacCommand {
             }
             HashSet<String> msgs = new HashSet();
             Set<String> bannedUsers = ((WBKMain)this.plugin).bandb.bannedUsers();
-            msgs.add(ChatColor.RED + "There are currently " + ChatColor.AQUA + bannedUsers.size() + ChatColor.RED + " players banned");
+            arg0.sendMessage(ChatColor.RED + "There are currently " + ChatColor.AQUA + bannedUsers.size() + ChatColor.RED + " players banned");
             Integer count = 1;
             for (String banned : bannedUsers) {
                 msgs.add(ChatColor.RED + count.toString() + ". " + ChatColor.YELLOW + banned + ChatColor.RED + " - " + ChatColor.DARK_RED + ((WBKMain)this.plugin).bandb.banReason(banned));

@@ -22,7 +22,7 @@ public class TempbanDatabase extends MacDatabase{
 	JSONObject defaultDb = new JSONObject();
         Collection<String> bans = new HashSet();
         try {
-            defaultDb.put("whitelisted", bans);
+            defaultDb.put("tempbanned", bans);
         } catch (JSONException ex) {
             Logger.getLogger(WhitelistDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
