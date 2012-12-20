@@ -88,7 +88,7 @@ public class WhitelistDatabase extends MacDatabase{
             } catch (JSONException ex) {
                 Logger.getLogger(WhitelistDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Collection<String> users = new HashSet<String>();
+            Collection<String> users = new HashSet();
             try {
                 defaultDb.put("whitelisted", users);
            } catch (JSONException ex) {

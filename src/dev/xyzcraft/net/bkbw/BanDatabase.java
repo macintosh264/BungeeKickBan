@@ -1,5 +1,6 @@
 package dev.xyzcraft.net.bkbw;
 
+import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,6 +22,9 @@ public class BanDatabase extends MacDatabase {
 		}
 		super.save();
 	}
+        public Set<String> bannedUsers() {
+            return super.databaseVar().keySet();
+        }
 	public void unban(String name) {
 		super.reload();
 		super.databaseVar().remove(name);
