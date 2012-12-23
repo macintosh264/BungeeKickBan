@@ -21,16 +21,12 @@ public class CommandBanList extends MacCommand {
                 arg0.sendMessage(StringFormatter.error("No Permission"));
                 return;
             }
-            HashSet<String> msgs = new HashSet();
             Set<String> bannedUsers = ((WBKMain)this.plugin).bandb.bannedUsers();
             arg0.sendMessage(ChatColor.RED + "There are currently " + ChatColor.AQUA + bannedUsers.size() + ChatColor.RED + " players banned");
             Integer count = 1;
             for (String banned : bannedUsers) {
-                msgs.add(ChatColor.RED + count.toString() + ". " + ChatColor.YELLOW + banned + ChatColor.RED + " - " + ChatColor.DARK_RED + ((WBKMain)this.plugin).bandb.banReason(banned));
+                arg0.sendMessage(ChatColor.RED + count.toString() + ". " + ChatColor.YELLOW + banned + ChatColor.RED + " - " + ChatColor.DARK_RED + ((WBKMain)this.plugin).bandb.banReason(banned));
                 count++;
-            }
-            for (String msg : msgs) {
-                arg0.sendMessage(msg);
             }
 	}
 
