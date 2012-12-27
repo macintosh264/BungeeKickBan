@@ -25,7 +25,7 @@ public class CommandKick extends MacCommand{
 			String partialPlayer = arg1[0];
 			String fullPlayer = null;
 			for (String u : BungeeCord.instance.connections.keySet()) {
-				if (u.startsWith(partialPlayer)) {
+				if (u.toUpperCase().startsWith(partialPlayer.toUpperCase())) {
 					fullPlayer = u;
 					break;
 				}
